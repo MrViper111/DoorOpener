@@ -69,12 +69,12 @@ class Control:
         setRGB(0, 255, 0)
         time.sleep(10)
 
-    # try:
-    #     pass
-    # except KeyboardInterrupt:
-    #     pass
-    # finally:
-    #     pwm_R.stop()
-    #     pwm_G.stop()
-    #     pwm_B.stop()
-    #     GPIO.cleanup()
+    try:
+        pass
+    except KeyboardInterrupt:
+        pass
+    finally:
+        pwm_R.stop()
+        pwm_G.stop()
+        pwm_B.stop()
+        GPIO.cleanup()
