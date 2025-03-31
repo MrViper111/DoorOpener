@@ -11,12 +11,9 @@ class Control:
     GLED = 6
     BLED = 13
 
-    pwm_R = 0
-    pwm_G = 0
-    pwm_B = 0
-
     # Setup GPIO
-    def __init__(self):
+    @staticmethod
+    def setup():
         GPIO.setmode(GPIO.BCM)
         GPIO.setup(Control.IN1, GPIO.OUT)
         GPIO.setup(Control.IN2, GPIO.OUT)
@@ -25,10 +22,10 @@ class Control:
         GPIO.setup(Control.GLED, GPIO.OUT)
         GPIO.setup(Control.BLED, GPIO.OUT)
 
-        # Initialize PWM for LED pins (frequency set to 1000Hz)
         Control.pwm_R = GPIO.PWM(Control.RLED, 1000)
         Control.pwm_G = GPIO.PWM(Control.GLED, 1000)
         Control.pwm_B = GPIO.PWM(Control.BLED, 1000)
+
         Control.pwm_R.start(0)
         Control.pwm_G.start(0)
         Control.pwm_B.start(0)
@@ -78,20 +75,23 @@ class Control:
         Control.setRGB(0, 255, 0)
         time.sleep(10)
 
+def main():
+    Control.setup()
+
     try:
-        pass
+        while True:
+            print("hi")
+            Control.open()
+            time.sleep(5)
+
+            Control.close()
     except KeyboardInterrupt:
         pass
     finally:
-        pwm_R.stop()
-        pwm_G.stop()
-        pwm_B.stop()
+        Control.pwm_R.stop()
+        Control.pwm_G.stop()
+        Control.pwm_B.stop()
         GPIO.cleanup()
 
-while True:
-    Control()
-
-    print("hi")
-    Control.open()
-    time.sleep(5)
-    Control.close()
+if __name__ == "__main__":
+    main()
