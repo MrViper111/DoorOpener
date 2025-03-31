@@ -11,22 +11,27 @@ class Control:
     GLED = 6
     BLED = 13
 
-    # Setup GPIO
-    GPIO.setmode(GPIO.BCM)
-    GPIO.setup(IN1, GPIO.OUT)
-    GPIO.setup(IN2, GPIO.OUT)
-    GPIO.setup(ENA, GPIO.OUT)
-    GPIO.setup(RLED, GPIO.OUT)
-    GPIO.setup(GLED, GPIO.OUT)
-    GPIO.setup(BLED, GPIO.OUT)
+    pwm_R = 0
+    pwm_G = 0
+    pwm_B = 0
 
-    # Initialize PWM for LED pins (frequency set to 1000Hz)
-    pwm_R = GPIO.PWM(RLED, 1000)
-    pwm_G = GPIO.PWM(GLED, 1000)
-    pwm_B = GPIO.PWM(BLED, 1000)
-    pwm_R.start(0)
-    pwm_G.start(0)
-    pwm_B.start(0)
+    # Setup GPIO
+    def __init__(self):
+        GPIO.setmode(GPIO.BCM)
+        GPIO.setup(Control.IN1, GPIO.OUT)
+        GPIO.setup(Control.IN2, GPIO.OUT)
+        GPIO.setup(Control.ENA, GPIO.OUT)
+        GPIO.setup(Control.RLED, GPIO.OUT)
+        GPIO.setup(Control.GLED, GPIO.OUT)
+        GPIO.setup(Control.BLED, GPIO.OUT)
+
+        # Initialize PWM for LED pins (frequency set to 1000Hz)
+        Control.pwm_R = GPIO.PWM(Control.RLED, 1000)
+        Control.pwm_G = GPIO.PWM(Control.GLED, 1000)
+        Control.pwm_B = GPIO.PWM(Control.BLED, 1000)
+        Control.pwm_R.start(0)
+        Control.pwm_G.start(0)
+        Control.pwm_B.start(0)
 
     @staticmethod
     def setRGB(RV, GV, BV):
@@ -84,6 +89,9 @@ class Control:
         GPIO.cleanup()
 
 while True:
+    Control()
+
+    print("hi")
     Control.open()
     time.sleep(5)
     Control.close()
