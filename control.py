@@ -27,6 +27,7 @@ class Control:
     pwm_G.start(0)
     pwm_B.start(0)
 
+    @staticmethod
     def setRGB(RV, GV, BV):
         """
         Set the RGB LED color.
@@ -39,6 +40,7 @@ class Control:
         pwm_G.ChangeDutyCycle(duty_G)
         pwm_B.ChangeDutyCycle(duty_B)
 
+    @staticmethod
     def close():
         """
         Close operation:
@@ -50,9 +52,10 @@ class Control:
         GPIO.output(ENA, GPIO.HIGH)
         GPIO.output(IN1, GPIO.HIGH)
         GPIO.output(IN2, GPIO.LOW)
-        setRGB(0, 0, 255)
+        Control.setRGB(0, 0, 255)
         time.sleep(10)
 
+    @staticmethod
     def open():
         """
         Open operation:
@@ -61,12 +64,12 @@ class Control:
         - After 1 second, change LED to green (0,255,0) to indicate "open".
         - Delay for 10 seconds.
         """
-        setRGB(255, 255, 0)
+        Control.setRGB(255, 255, 0)
         GPIO.output(ENA, GPIO.HIGH)
         GPIO.output(IN1, GPIO.LOW)
         GPIO.output(IN2, GPIO.HIGH)
         time.sleep(1)
-        setRGB(0, 255, 0)
+        Control.setRGB(0, 255, 0)
         time.sleep(10)
 
     try:
