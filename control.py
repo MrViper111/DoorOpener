@@ -3,6 +3,7 @@ import time
 
 # Define GPIO pins (using BCM numbering)
 class Control:
+
     IN1 = 17
     IN2 = 27
     ENA = 22  # Motor enable pin
@@ -36,9 +37,9 @@ class Control:
         duty_R = RV / 255 * 100
         duty_G = GV / 255 * 100
         duty_B = BV / 255 * 100
-        pwm_R.ChangeDutyCycle(duty_R)
-        pwm_G.ChangeDutyCycle(duty_G)
-        pwm_B.ChangeDutyCycle(duty_B)
+        Control.pwm_R.ChangeDutyCycle(duty_R)
+        Control.pwm_G.ChangeDutyCycle(duty_G)
+        Control.pwm_B.ChangeDutyCycle(duty_B)
 
     @staticmethod
     def close():
@@ -49,9 +50,9 @@ class Control:
         - Display blue color (0,0,255) for "working but not open".
         - Delay for 10 seconds.
         """
-        GPIO.output(ENA, GPIO.HIGH)
-        GPIO.output(IN1, GPIO.HIGH)
-        GPIO.output(IN2, GPIO.LOW)
+        GPIO.output(Control.ENA, GPIO.HIGH)
+        GPIO.output(Control.IN1, GPIO.HIGH)
+        GPIO.output(Control.IN2, GPIO.LOW)
         Control.setRGB(0, 0, 255)
         time.sleep(10)
 
@@ -65,9 +66,9 @@ class Control:
         - Delay for 10 seconds.
         """
         Control.setRGB(255, 255, 0)
-        GPIO.output(ENA, GPIO.HIGH)
-        GPIO.output(IN1, GPIO.LOW)
-        GPIO.output(IN2, GPIO.HIGH)
+        GPIO.output(Control.ENA, GPIO.HIGH)
+        GPIO.output(Control.IN1, GPIO.LOW)
+        GPIO.output(Control.IN2, GPIO.HIGH)
         time.sleep(1)
         Control.setRGB(0, 255, 0)
         time.sleep(10)
