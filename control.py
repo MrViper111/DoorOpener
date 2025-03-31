@@ -78,3 +78,8 @@ class Control:
         pwm_G.stop()
         pwm_B.stop()
         GPIO.cleanup()
+
+while True:
+    Control.open()
+    time.sleep(5)
+    Control.close()
