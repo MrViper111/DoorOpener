@@ -32,9 +32,9 @@ class Control:
 
     @staticmethod
     def setRGB(RV, GV, BV):
-        duty_R = RV / 255 * 100
-        duty_G = GV / 255 * 100
-        duty_B = BV / 255 * 100
+        duty_R = (255 - RV) / 255 * 100
+        duty_G = (255 - GV) / 255 * 100
+        duty_B = (255 - BV) / 255 * 100
 
         Control.pwm_R.ChangeDutyCycle(duty_R)
         Control.pwm_G.ChangeDutyCycle(duty_G)
@@ -42,17 +42,17 @@ class Control:
 
     @staticmethod
     def close():
+        Control.setRGB(255, 0, 0)
         GPIO.output(Control.ENA, GPIO.HIGH)
         GPIO.output(Control.IN1, GPIO.HIGH)
         GPIO.output(Control.IN2, GPIO.LOW)
-        Control.setRGB(255, 0, 0)
 
     @staticmethod
     def open():
+        Control.setRGB(0, 255, 0)
         GPIO.output(Control.ENA, GPIO.HIGH)
         GPIO.output(Control.IN1, GPIO.LOW)
         GPIO.output(Control.IN2, GPIO.HIGH)
-        Control.setRGB(0, 255, 0)
 
     @staticmethod
     def clean():
