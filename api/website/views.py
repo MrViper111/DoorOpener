@@ -2,12 +2,12 @@ import asyncio
 import json
 import os
 import time
+import sys
 from datetime import datetime
 import random
-from crypt import methods
 from flask import Blueprint, render_template, request, jsonify, redirect
-from functools import update_wrapper, wraps
 
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../../..")))
 from control import Control
 
 
