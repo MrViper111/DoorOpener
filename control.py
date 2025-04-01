@@ -1,7 +1,6 @@
 import RPi.GPIO as GPIO
 import time
 
-# Define GPIO pins (using BCM numbering)
 class Control:
 
     IN1 = 11
@@ -32,66 +31,33 @@ class Control:
 
     @staticmethod
     def setRGB(RV, GV, BV):
-        """
-        Set the RGB LED color.
-        RV, GV, BV range from 0 to 255.
-        """
         duty_R = RV / 255 * 100
         duty_G = GV / 255 * 100
         duty_B = BV / 255 * 100
+
         Control.pwm_R.ChangeDutyCycle(duty_R)
         Control.pwm_G.ChangeDutyCycle(duty_G)
         Control.pwm_B.ChangeDutyCycle(duty_B)
 
     @staticmethod
     def close():
-        """
-        Close operation:
-        - Enable motor (set to full power).
-        - Set IN1 HIGH and IN2 LOW.
-        - Display blue color (0,0,255) for "working but not open".
-        - Delay for 10 seconds.
-        """
         GPIO.output(Control.ENA, GPIO.HIGH)
         GPIO.output(Control.IN1, GPIO.HIGH)
         GPIO.output(Control.IN2, GPIO.LOW)
-        Control.setRGB(0, 0, 255)
-        time.sleep(10)
+        Control.setRGB(255, 0, 0)
 
     @staticmethod
     def open():
-        """
-        Open operation:
-        - Display yellow (255,255,0) while starting.
-        - Reverse motor direction: set IN1 LOW and IN2 HIGH.
-        - After 1 second, change LED to green (0,255,0) to indicate "open".
-        - Delay for 10 seconds.
-        """
         Control.setRGB(255, 255, 0)
         GPIO.output(Control.ENA, GPIO.HIGH)
         GPIO.output(Control.IN1, GPIO.LOW)
         GPIO.output(Control.IN2, GPIO.HIGH)
-        time.sleep(1)
         Control.setRGB(0, 255, 0)
-        time.sleep(10)
 
-def main():
-    Control.setup()
-
-    try:
-        while True:
-            print("hi")
-            Control.open()
-            time.sleep(5)
-
-            Control.close()
-    except KeyboardInterrupt:
-        pass
-    finally:
+    @staticmethod
+    def clean():
         Control.pwm_R.stop()
         Control.pwm_G.stop()
         Control.pwm_B.stop()
-        GPIO.cleanup()
 
-if __name__ == "__main__":
-    main()
+        GPIO.cleanup()
