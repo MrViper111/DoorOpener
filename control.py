@@ -1,5 +1,4 @@
 import RPi.GPIO as GPIO
-import time
 
 class Control:
 
@@ -28,6 +27,8 @@ class Control:
         Control.pwm_R.start(0)
         Control.pwm_G.start(0)
         Control.pwm_B.start(0)
+
+        Control.close()
 
     @staticmethod
     def setRGB(RV, GV, BV):
@@ -61,3 +62,4 @@ class Control:
         Control.pwm_B.stop()
 
         GPIO.cleanup()
+
