@@ -4,12 +4,12 @@ import time
 # Define GPIO pins (using BCM numbering)
 class Control:
 
-    IN1 = 17
-    IN2 = 27
-    ENA = 22  # Motor enable pin
-    RLED = 5
-    GLED = 6
-    BLED = 13
+    IN1 = 11
+    IN2 = 8
+    ENA = 25  # Motor enable pin
+    RLED = 3
+    GLED = 4
+    BLED = 14
 
     # Setup GPIO
     @staticmethod
