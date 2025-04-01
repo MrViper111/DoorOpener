@@ -17,6 +17,7 @@ def verify_door_opened():
 def verify_door_closed():
     return True
 
+Control.setup()
 
 views = Blueprint("views", __name__)
 is_opened = verify_door_opened()
