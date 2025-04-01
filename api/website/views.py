@@ -7,7 +7,7 @@ from datetime import datetime
 import random
 from flask import Blueprint, render_template, request, jsonify, redirect
 
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../../..")))
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../../")))
 from control import Control
 
 
