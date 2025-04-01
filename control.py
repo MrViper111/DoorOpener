@@ -49,7 +49,6 @@ class Control:
 
     @staticmethod
     def open():
-        Control.setRGB(255, 255, 0)
         GPIO.output(Control.ENA, GPIO.HIGH)
         GPIO.output(Control.IN1, GPIO.LOW)
         GPIO.output(Control.IN2, GPIO.HIGH)
