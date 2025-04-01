@@ -12,9 +12,11 @@ from control import Control
 
 
 def verify_door_opened():
+    time.sleep(10)
     return True
 
 def verify_door_closed():
+    time.sleep(10)
     return True
 
 Control.setup()
