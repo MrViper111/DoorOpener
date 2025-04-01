@@ -47,7 +47,7 @@ def open_door():
 def close_door():
     global is_opened, last_updated
     start_time = time.time()
-    Control.open()
+    Control.close()
 
     while not verify_door_closed():
         if time.time() - start_time >= API_TIMEOUT:
