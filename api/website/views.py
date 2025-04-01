@@ -20,7 +20,7 @@ def verify_door_closed():
 Control.setup()
 
 views = Blueprint("views", __name__)
-is_opened = verify_door_opened()
+is_opened = False
 last_updated = time.time()
 API_TIMEOUT = 10
 
