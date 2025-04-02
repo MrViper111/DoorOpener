@@ -6,6 +6,9 @@ import sys
 from datetime import datetime
 import random
 from flask import Blueprint, render_template, request, jsonify, redirect
+import hmac
+import hashlib
+from dotenv import load_dotenv
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../../")))
 from control import Control
@@ -26,14 +29,34 @@ is_opened = False
 last_updated = time.time()
 API_TIMEOUT = 10
 
+load_dotenv()
+SHARED_SECRET = os.getenv("API_SECRET_KEY")
+TIME_WINDOW = 60
+
+def generate_time_key():
+    print(SHARED_SECRET)
+    time_chunk = int(time.time() // TIME_WINDOW)
+    key = hmac.new(SHARED_SECRET.encode(), str(time_chunk).encode(), hashlib.sha256)
+
+    return key.hexdigest()
+
 
 @views.route("/")
 def home():
     return render_template("home.html")
 
+@views.route("/key")
+def key():
+    return generate_time_key()
+
 @views.route("/api/open")
 def open_door():
     global is_opened, last_updated
+    client_key = request.args.get("key")
+
+    if client_key not in (generate_time_key(),):
+          return {"success": False, "error": "unauthorized"}, 401
+
     start_time = time.time()
     Control.open()
 
@@ -48,6 +71,11 @@ def open_door():
 @views.route("/api/close")
 def close_door():
     global is_opened, last_updated
+    client_key = request.args.get("key")
+
+    if client_key not in (generate_time_key(),):
+          return {"success": False, "error": "unauthorized"}, 401
+
     start_time = time.time()
     Control.close()
 
@@ -61,4 +89,9 @@ def close_door():
 
 @views.route("api/status")
 def status():
+    client_key = request.args.get("key")
+
+    if client_key not in (generate_time_key(),):
+        return {"success": False, "error": "unauthorized"}, 401
+
     return {"api": True, "opened": is_opened, "position": 100, "power_supply": 30, "wifi_network": "staff-net", "last_updated": int(last_updated)}

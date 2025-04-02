@@ -9,7 +9,8 @@ class Control:
     GLED = 4
     BLED = 14
 
-    # Setup GPIO
+    battery_supply = 100
+
     @staticmethod
     def setup():
         GPIO.setmode(GPIO.BCM)
@@ -61,4 +62,3 @@ class Control:
         Control.pwm_B.stop()
 
         GPIO.cleanup()
-
