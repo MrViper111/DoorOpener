@@ -17,8 +17,8 @@ class Control:
 
     @staticmethod
     def setup():
-        GPIO.setmode(GPIO.BCM)
-        GPIO.cleanup()
+        if GPIO.getmode() is None:
+            GPIO.setmode(GPIO.BCM)
 
         GPIO.setup(Control.IN1, GPIO.OUT)
         GPIO.setup(Control.IN2, GPIO.OUT)
@@ -68,6 +68,10 @@ class Control:
     def clean():
         if GPIO.getmode() is None:
             GPIO.setmode(GPIO.BCM)
+
+        if Control.pwm_R: Control.pwm_R.stop()
+        if Control.pwm_G: Control.pwm_G.stop()
+        if Control.pwm_B: Control.pwm_B.stop()
 
         GPIO.cleanup()
         Control.pwm_R = None
