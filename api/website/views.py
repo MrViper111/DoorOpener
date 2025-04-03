@@ -23,7 +23,7 @@ def verify_door_closed():
     return True
 
 Control.setup()
-Control.clean()
+# Control.clean()
 
 views = Blueprint("views", __name__)
 is_opened = False
