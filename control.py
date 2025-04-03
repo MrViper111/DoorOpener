@@ -9,6 +9,10 @@ class Control:
     GLED = 4
     BLED = 14
 
+    pwm_R = None
+    pwm_G = None
+    pwm_B = None
+
     battery_supply = 100
 
     @staticmethod
