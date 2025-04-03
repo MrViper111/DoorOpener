@@ -68,6 +68,14 @@ def open_door():
     last_updated = time.time()
     return {"success": True}
 
+@views.route("fopen")
+def fopen():
+    Control.open()
+
+@views.route("fclose")
+def fclose():
+    Control.close()
+
 @views.route("/api/close")
 def close_door():
     global is_opened, last_updated
@@ -94,4 +102,4 @@ def status():
     if client_key not in (generate_time_key(),):
         return {"success": False, "error": "unauthorized"}, 401
 
-    return {"api": True, "opened": is_opened, "position": 100, "power_supply": 30, "wifi_network": "staff-net", "last_updated": int(last_updated)}
+    return {"api": True, "opened": is_opened, "position": 100, "power_supply": Control.battery_supply, "wifi_network": "staff-net", "last_updated": int(last_updated)}

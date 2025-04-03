@@ -8,6 +8,7 @@ class Control:
     RLED = 3
     GLED = 4
     BLED = 14
+    PHOTO = 23
 
     battery_supply = 100
 
@@ -20,6 +21,7 @@ class Control:
         GPIO.setup(Control.RLED, GPIO.OUT)
         GPIO.setup(Control.GLED, GPIO.OUT)
         GPIO.setup(Control.BLED, GPIO.OUT)
+        GPIO.setup(Control.PHOTO, GPIO.IN)
 
         Control.pwm_R = GPIO.PWM(Control.RLED, 1000)
         Control.pwm_G = GPIO.PWM(Control.GLED, 1000)
@@ -54,6 +56,10 @@ class Control:
         GPIO.output(Control.ENA, GPIO.HIGH)
         GPIO.output(Control.IN1, GPIO.LOW)
         GPIO.output(Control.IN2, GPIO.HIGH)
+
+    @staticmethod
+    def read_photo():
+
 
     @staticmethod
     def clean():
