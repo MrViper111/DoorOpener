@@ -47,6 +47,9 @@ class Control:
 
     @staticmethod
     def close():
+        if GPIO.getmode() is None:
+            GPIO.setmode(GPIO.BCM)
+
         Control.setRGB(255, 0, 0)
         GPIO.output(Control.ENA, GPIO.HIGH)
         GPIO.output(Control.IN1, GPIO.HIGH)
@@ -61,6 +64,9 @@ class Control:
 
     @staticmethod
     def clean():
+        if GPIO.getmode() is None:
+            GPIO.setmode(GPIO.BCM)
+
         if Control.pwm_R: Control.pwm_R.stop()
         if Control.pwm_G: Control.pwm_G.stop()
         if Control.pwm_B: Control.pwm_B.stop()
