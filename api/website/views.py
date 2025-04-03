@@ -71,10 +71,12 @@ def open_door():
 @views.route("fopen")
 def fopen():
     Control.open()
+    return "ok"
 
 @views.route("fclose")
 def fclose():
     Control.close()
+    return "ok"
 
 @views.route("/api/close")
 def close_door():
