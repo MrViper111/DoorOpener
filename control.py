@@ -61,8 +61,8 @@ class Control:
 
     @staticmethod
     def clean():
-        # Control.pwm_R.stop()
-        # Control.pwm_G.stop()
-        # Control.pwm_B.stop()
+        if Control.pwm_R: Control.pwm_R.stop()
+        if Control.pwm_G: Control.pwm_G.stop()
+        if Control.pwm_B: Control.pwm_B.stop()
 
         GPIO.cleanup()
