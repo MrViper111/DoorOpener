@@ -19,6 +19,7 @@ class Control:
     def setup():
         if GPIO.getmode() is None:
             GPIO.setmode(GPIO.BCM)
+        print(GPIO.getmode())
 
         GPIO.setup(Control.IN1, GPIO.OUT)
         GPIO.setup(Control.IN2, GPIO.OUT)
@@ -51,6 +52,8 @@ class Control:
     def close():
         if GPIO.getmode() is None:
             GPIO.setmode(GPIO.BCM)
+
+        print(GPIO.getmode())
 
         # Control.setRGB(255, 0, 0)
         GPIO.output(Control.ENA, GPIO.HIGH)
