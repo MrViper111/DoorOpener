@@ -33,7 +33,7 @@ class Control:
         Control.pwm_G.start(0)
         Control.pwm_B.start(0)
 
-        Control.close()
+        # Control.close()
 
     @staticmethod
     def setRGB(RV, GV, BV):
