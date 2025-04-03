@@ -22,6 +22,7 @@ def verify_door_closed():
     time.sleep(10)
     return True
 
+Control.clean()
 Control.setup()
 
 views = Blueprint("views", __name__)
