@@ -59,7 +59,7 @@ class Control:
 
     @staticmethod
     def read_photo():
-
+        ...
 
     @staticmethod
     def clean():
