@@ -78,6 +78,11 @@ def fclose():
     Control.close()
     return "ok"
 
+@views.route("freset")
+def freset():
+    Control.clean()
+    return "ok"
+
 @views.route("/api/close")
 def close_door():
     global is_opened, last_updated
