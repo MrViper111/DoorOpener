@@ -4,7 +4,7 @@ class Control:
 
     IN1 = 11
     IN2 = 8
-    ENA = 25  # Motor enable pin
+    ENA = 23  # Motor enable pin
     RLED = 3
     GLED = 4
     BLED = 14
@@ -19,6 +19,7 @@ class Control:
     def setup():
         if GPIO.getmode() is None:
             GPIO.setmode(GPIO.BCM)
+
         print(GPIO.getmode())
         print("Setting up GPIO pins...")
 
