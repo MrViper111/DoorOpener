@@ -2,16 +2,16 @@ import RPi.GPIO as GPIO
 
 class Control:
 
-    IN1 = 11
-    IN2 = 8
+    IN1 = 10
+    IN2 = 9
     ENA = 23  # Motor enable pin
-    RLED = 3
-    GLED = 4
-    BLED = 14
+    # RLED = 3
+    # GLED = 4
+    # BLED = 14
 
-    pwm_R = None
-    pwm_G = None
-    pwm_B = None
+    # pwm_R = None
+    # pwm_G = None
+    # pwm_B = None
 
     battery_supply = 100
 
