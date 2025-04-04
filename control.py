@@ -20,6 +20,7 @@ class Control:
         if GPIO.getmode() is None:
             GPIO.setmode(GPIO.BCM)
         print(GPIO.getmode())
+        print("Setting up GPIO pins...")
 
         GPIO.setup(Control.IN1, GPIO.OUT)
         GPIO.setup(Control.IN2, GPIO.OUT)
@@ -54,6 +55,7 @@ class Control:
             GPIO.setmode(GPIO.BCM)
 
         print(GPIO.getmode())
+        print("Closing door...")
 
         # Control.setRGB(255, 0, 0)
         GPIO.output(Control.ENA, GPIO.HIGH)
@@ -62,6 +64,7 @@ class Control:
 
     @staticmethod
     def open():
+        print("Opening door...")
         # Control.setRGB(0, 255, 0)
         GPIO.output(Control.ENA, GPIO.HIGH)
         GPIO.output(Control.IN1, GPIO.LOW)
