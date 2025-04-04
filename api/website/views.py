@@ -29,7 +29,7 @@ load_dotenv()
 SHARED_SECRET = os.getenv("API_SECRET_KEY")
 TIME_WINDOW = 60
 
-@views.before_app_first_request
+@views.before_app_request
 def initialize_gpio():
     Control.setup()
 
