@@ -62,6 +62,10 @@ class Control:
         GPIO.output(Control.IN1, GPIO.HIGH)
         GPIO.output(Control.IN2, GPIO.LOW)
 
+        print("ENA:", GPIO.input(Control.ENA))
+        print("IN1:", GPIO.input(Control.IN1))
+        print("IN2:", GPIO.input(Control.IN2))
+
     @staticmethod
     def open():
         print("Opening door...")

@@ -5,7 +5,7 @@ import time
 import sys
 from datetime import datetime
 import random
-from flask import Blueprint, render_template, request, jsonify, redirect
+from flask import Blueprint, render_template, request, jsonify, redirect, current_app
 import hmac
 import hashlib
 from dotenv import load_dotenv
@@ -15,14 +15,10 @@ from control import Control
 
 
 def verify_door_opened():
-    time.sleep(10)
     return True
 
 def verify_door_closed():
-    time.sleep(10)
     return True
-
-Control.setup()
 
 views = Blueprint("views", __name__)
 is_opened = False
@@ -32,6 +28,10 @@ API_TIMEOUT = 10
 load_dotenv()
 SHARED_SECRET = os.getenv("API_SECRET_KEY")
 TIME_WINDOW = 60
+
+@views.before_app_first_request
+def initialize_gpio():
+    Control.setup()
 
 def generate_time_key():
     print(SHARED_SECRET)
@@ -68,17 +68,17 @@ def open_door():
     last_updated = time.time()
     return {"success": True}
 
-@views.route("fopen")
+@views.route("/fopen")
 def fopen():
     Control.open()
     return "ok"
 
-@views.route("fclose")
+@views.route("/fclose")
 def fclose():
     Control.close()
     return "ok"
 
-@views.route("freset")
+@views.route("/freset")
 def freset():
     Control.clean()
     return "ok"
