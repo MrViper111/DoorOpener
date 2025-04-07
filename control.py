@@ -3,8 +3,8 @@ import time
 
 class Control:
 
-    IN1 = 11
-    IN2 = 8
+    IN1 = 10
+    IN2 = 9
     ENA = 25  # Motor enable pin
 
     # Setup GPIO
