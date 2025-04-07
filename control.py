@@ -1,12 +1,13 @@
+import RPi.GPIO as GPIO
 import time
 
-import RPi.GPIO as GPIO
-
 class Control:
-    IN1 = 10
-    IN2 = 9
+
+    IN1 = 11
+    IN2 = 8
     ENA = 25  # Motor enable pin
 
+    # Setup GPIO
     @staticmethod
     def setup():
         GPIO.setmode(GPIO.BCM)
@@ -26,14 +27,20 @@ class Control:
         GPIO.output(Control.IN1, GPIO.LOW)
         GPIO.output(Control.IN2, GPIO.HIGH)
 
+    @staticmethod
+    def clean():
+        GPIO.cleanup()
+
 if __name__ == "__main__":
     Control.setup()
     print("setup complete")
     time.sleep(3)
 
-    print("opening...")
+    print("opening door...")
     Control.open()
+    print("door opened")
     time.sleep(15)
-    print("closing...")
+
+    print("closing door...")
     Control.close()
-    time.sleep(15)
+    print("door closed")
