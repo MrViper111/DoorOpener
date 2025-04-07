@@ -9,7 +9,7 @@ class Control:
 
     @staticmethod
     def setup():
-        GPIO.setmode(GPIO.BOARD)
+        GPIO.setmode(GPIO.BCM)
         GPIO.setup(Control.IN1, GPIO.OUT)
         GPIO.setup(Control.IN2, GPIO.OUT)
         GPIO.setup(Control.ENA, GPIO.OUT)
