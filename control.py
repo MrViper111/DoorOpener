@@ -7,6 +7,8 @@ class Control:
     IN2 = 9
     ENA = 25  # Motor enable pin
 
+    battery_supply = 100
+
     # Setup GPIO
     @staticmethod
     def setup():
