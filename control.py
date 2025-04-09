@@ -33,7 +33,7 @@ class Control:
 
     @staticmethod
     def verified_open():
-        return GPIO.input(Control.BTN) == GPIO.LOW
+        return GPIO.input(Control.BTN) == GPIO.HIGH
 
     @staticmethod
     def clean():
