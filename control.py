@@ -1,8 +1,6 @@
 import RPi.GPIO as GPIO
 import time
 
-from api.website.views import verify_door_opened
-
 
 class Control:
 
