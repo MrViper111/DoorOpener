@@ -5,7 +5,8 @@ class Control:
 
     IN1 = 10
     IN2 = 9
-    ENA = 25  # Motor enable pin
+    ENA = 25
+    BTN = 11
 
     battery_supply = 100
 
@@ -16,6 +17,7 @@ class Control:
         GPIO.setup(Control.IN1, GPIO.OUT)
         GPIO.setup(Control.IN2, GPIO.OUT)
         GPIO.setup(Control.ENA, GPIO.OUT)
+        GPIO.setup(Control.BTN, GPIO.IN)
 
     @staticmethod
     def close():
@@ -30,6 +32,10 @@ class Control:
         GPIO.output(Control.IN2, GPIO.HIGH)
 
     @staticmethod
+    def verified_open():
+        return GPIO.input(Control.BTN) == GPIO.LOW
+
+    @staticmethod
     def clean():
         GPIO.cleanup()
 
@@ -41,6 +47,8 @@ if __name__ == "__main__":
     print("opening door...")
     Control.open()
     print("door opened")
+    if Control.verified_open():
+        print("the door is indeed open")
     time.sleep(15)
 
     print("closing door...")
