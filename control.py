@@ -45,6 +45,7 @@ class Control:
 
     @staticmethod
     def verified_open():
+        print(GPIO.input(Control.BTN) == GPIO.HIGH)
         return GPIO.input(Control.BTN) == GPIO.HIGH
 
     @staticmethod
