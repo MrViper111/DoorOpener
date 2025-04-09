@@ -1,12 +1,16 @@
 import RPi.GPIO as GPIO
 import time
 
+from api.website.views import verify_door_opened
+
+
 class Control:
 
     IN1 = 10
     IN2 = 9
     ENA = 25
     BTN = 11
+    LED = 26
 
     battery_supply = 100
 
@@ -17,10 +21,17 @@ class Control:
         GPIO.setup(Control.IN1, GPIO.OUT)
         GPIO.setup(Control.IN2, GPIO.OUT)
         GPIO.setup(Control.ENA, GPIO.OUT)
+        GPIO.setup(Control.LED, GPIO.OUT)
         GPIO.setup(Control.BTN, GPIO.IN)
+
+        if Control.verified_open():
+            print("it was already open")
+            GPIO.output(Control.LED, GPIO.HIGH)
 
     @staticmethod
     def close():
+        GPIO.output(Control.LED, GPIO.LOW)
+
         GPIO.output(Control.ENA, GPIO.HIGH)
         GPIO.output(Control.IN1, GPIO.HIGH)
         GPIO.output(Control.IN2, GPIO.LOW)
@@ -30,6 +41,9 @@ class Control:
         GPIO.output(Control.ENA, GPIO.HIGH)
         GPIO.output(Control.IN1, GPIO.LOW)
         GPIO.output(Control.IN2, GPIO.HIGH)
+
+        if Control.verified_open():
+            GPIO.output(Control.LED, GPIO.HIGH)
 
     @staticmethod
     def verified_open():
