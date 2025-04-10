@@ -26,7 +26,6 @@ class Control:
         GPIO.setup(Control.IN1, GPIO.OUT)
         GPIO.setup(Control.IN2, GPIO.OUT)
         GPIO.setup(Control.ENA, GPIO.OUT)
-        GPIO.setup(Control.LED, GPIO.OUT)
         GPIO.setup(Control.BTN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
         GPIO.setup(Control.LED_R, GPIO.OUT)
