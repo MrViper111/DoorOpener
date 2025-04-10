@@ -13,13 +13,6 @@ from dotenv import load_dotenv
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../../")))
 from control import Control
 
-
-def verify_door_opened():
-    return True
-
-def verify_door_closed():
-    return True
-
 views = Blueprint("views", __name__)
 is_opened = False
 last_updated = time.time()
@@ -60,7 +53,7 @@ def open_door():
     start_time = time.time()
     Control.open()
 
-    while not verify_door_opened():
+    while not Control.verified_open():
         if time.time() - start_time >= API_TIMEOUT:
             return {"success": False}
 
@@ -94,7 +87,7 @@ def close_door():
     start_time = time.time()
     Control.close()
 
-    while not verify_door_closed():
+    while Control.verified_open():
         if time.time() - start_time >= API_TIMEOUT:
             return {"success": False}
 
