@@ -67,3 +67,6 @@ if __name__ == "__main__":
     print("closing door...")
     Control.close()
     print("door closed")
+
+    while True:
+        print(GPIO.input(Control.BTN))
