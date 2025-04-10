@@ -43,13 +43,12 @@ class Control:
             Control.current_color = (0, 0, 0)
 
         if Control.verified_open():
-            print("it was already open")
-            GPIO.output(Control.LED, GPIO.HIGH)
+            Control.setRGB(0, 255, 0)
+        else:
+            Control.setRGB(255, 0, 0)
 
     @staticmethod
     def close():
-        GPIO.output(Control.LED, GPIO.LOW)
-
         GPIO.output(Control.ENA, GPIO.HIGH)
         GPIO.output(Control.IN1, GPIO.HIGH)
         GPIO.output(Control.IN2, GPIO.LOW)
@@ -59,9 +58,6 @@ class Control:
         GPIO.output(Control.ENA, GPIO.HIGH)
         GPIO.output(Control.IN1, GPIO.LOW)
         GPIO.output(Control.IN2, GPIO.HIGH)
-
-        if Control.verified_open():
-            GPIO.output(Control.LED, GPIO.HIGH)
 
     @staticmethod
     def verified_open():
