@@ -7,7 +7,7 @@ class Control:
     IN1 = 10
     IN2 = 9
     ENA = 25
-    BTN = 11
+    BTN = 14
     LED = 26
 
     battery_supply = 100
@@ -20,7 +20,7 @@ class Control:
         GPIO.setup(Control.IN2, GPIO.OUT)
         GPIO.setup(Control.ENA, GPIO.OUT)
         GPIO.setup(Control.LED, GPIO.OUT)
-        GPIO.setup(Control.BTN, GPIO.IN)
+        GPIO.setup(Control.BTN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
         if Control.verified_open():
             print("it was already open")
