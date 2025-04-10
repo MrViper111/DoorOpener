@@ -8,9 +8,16 @@ class Control:
     IN2 = 9
     ENA = 25
     BTN = 14
-    LED = 26
+
+    LED_R = 17
+    LED_G = 27
+    LED_B = 22
 
     battery_supply = 100
+    pwm_r = None
+    pwm_g = None
+    pwm_b = None
+    current_color = (0, 0, 0)
 
     # Setup GPIO
     @staticmethod
@@ -21,6 +28,19 @@ class Control:
         GPIO.setup(Control.ENA, GPIO.OUT)
         GPIO.setup(Control.LED, GPIO.OUT)
         GPIO.setup(Control.BTN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+
+        GPIO.setup(Control.LED_R, GPIO.OUT)
+        GPIO.setup(Control.LED_G, GPIO.OUT)
+        GPIO.setup(Control.LED_B, GPIO.OUT)
+
+        # Setup PWM for RGB LED, off by default
+        Control.pwm_r = GPIO.PWM(Control.LED_R, 100)
+        Control.pwm_g = GPIO.PWM(Control.LED_G, 100)
+        Control.pwm_b = GPIO.PWM(Control.LED_B, 100)
+        Control.pwm_r.start(0)
+        Control.pwm_g.start(0)
+        Control.pwm_b.start(0)
+        Control.current_color = (0, 0, 0)
 
         if Control.verified_open():
             print("it was already open")
@@ -45,10 +65,30 @@ class Control:
 
     @staticmethod
     def verified_open():
-        return GPIO.input(Control.BTN) == 0
+        if GPIO.input(Control.BTN) == 0:
+            Control.setRGB(0, 255, 0)
+            return True
+
+        Control.setRGB(255, 0, 0)
+        return False
+
+
+    @staticmethod
+    def setRGB(r, g, b):
+        # Update the persistent RGB color
+        Control.current_color = (r, g, b)
+        Control.pwm_r.ChangeDutyCycle(r)
+        Control.pwm_g.ChangeDutyCycle(g)
+        Control.pwm_b.ChangeDutyCycle(b)
 
     @staticmethod
     def clean():
+        if Control.pwm_r:
+            Control.pwm_r.stop()
+        if Control.pwm_g:
+            Control.pwm_g.stop()
+        if Control.pwm_b:
+            Control.pwm_b.stop()
         GPIO.cleanup()
 
 if __name__ == "__main__":
