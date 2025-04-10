@@ -59,7 +59,7 @@ class Control:
         GPIO.output(Control.IN1, GPIO.LOW)
         GPIO.output(Control.IN2, GPIO.HIGH)
 
-    @staticmethod
+    @staticmethod # lord save me
     def verified_open():
         if GPIO.input(Control.BTN) == 0:
             Control.setRGB(0, 255, 0)
