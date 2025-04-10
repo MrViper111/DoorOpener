@@ -32,14 +32,15 @@ class Control:
         GPIO.setup(Control.LED_G, GPIO.OUT)
         GPIO.setup(Control.LED_B, GPIO.OUT)
 
-        # Setup PWM for RGB LED, off by default
-        Control.pwm_r = GPIO.PWM(Control.LED_R, 100)
-        Control.pwm_g = GPIO.PWM(Control.LED_G, 100)
-        Control.pwm_b = GPIO.PWM(Control.LED_B, 100)
-        Control.pwm_r.start(0)
-        Control.pwm_g.start(0)
-        Control.pwm_b.start(0)
-        Control.current_color = (0, 0, 0)
+        # Setup PWM for RGB LED, off by default only if not already initialized
+        if Control.pwm_r is None:
+            Control.pwm_r = GPIO.PWM(Control.LED_R, 100)
+            Control.pwm_g = GPIO.PWM(Control.LED_G, 100)
+            Control.pwm_b = GPIO.PWM(Control.LED_B, 100)
+            Control.pwm_r.start(0)
+            Control.pwm_g.start(0)
+            Control.pwm_b.start(0)
+            Control.current_color = (0, 0, 0)
 
         if Control.verified_open():
             print("it was already open")
@@ -74,11 +75,14 @@ class Control:
 
     @staticmethod
     def setRGB(r, g, b):
-        # Update the persistent RGB color
+        # Scale values from 0–255 to 0–100 for the PWM duty cycle
+        duty_r = (r / 255.0) * 100
+        duty_g = (g / 255.0) * 100
+        duty_b = (b / 255.0) * 100
         Control.current_color = (r, g, b)
-        Control.pwm_r.ChangeDutyCycle(r)
-        Control.pwm_g.ChangeDutyCycle(g)
-        Control.pwm_b.ChangeDutyCycle(b)
+        Control.pwm_r.ChangeDutyCycle(duty_r)
+        Control.pwm_g.ChangeDutyCycle(duty_g)
+        Control.pwm_b.ChangeDutyCycle(duty_b)
 
     @staticmethod
     def clean():
