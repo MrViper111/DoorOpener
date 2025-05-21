@@ -10,13 +10,12 @@ def clear():
     os.system("clear")
 
 def getch():
-    """Read a single key press and return the character (including escape sequences for arrow keys)."""
     fd = sys.stdin.fileno()
     old_settings = termios.tcgetattr(fd)
     try:
         tty.setraw(fd)
         ch = sys.stdin.read(1)
-        if ch == '\x1b':  # check for escape sequence (arrow keys)
+        if ch == '\x1b':
             ch += sys.stdin.read(2)
         return ch
     finally:

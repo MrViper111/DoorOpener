@@ -102,4 +102,4 @@ def status():
     if client_key not in (generate_time_key(),):
         return {"success": False, "error": "unauthorized"}, 401
 
-    return {"api": True, "opened": is_opened, "position": 100, "power_supply": Control.battery_supply, "wifi_network": "staff-net", "last_updated": int(last_updated)}
+    return {"api": True, "opened": is_opened, "position": 100, "power_supply": Control.get_estimated_power(), "wifi_network": "staff-net", "last_updated": int(last_updated)}

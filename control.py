@@ -19,7 +19,6 @@ class Control:
     pwm_b = None
     current_color = (0, 0, 0)
 
-    # Setup GPIO
     @staticmethod
     def setup():
         GPIO.setmode(GPIO.BCM)
@@ -68,10 +67,12 @@ class Control:
         Control.setRGB(255, 0, 0)
         return False
 
+    @staticmethod
+    def get_estimated_power():
+        return 100
 
     @staticmethod
     def setRGB(r, g, b):
-        # Scale values from 0–255 to 0–100 for the PWM duty cycle
         duty_r = (r / 255.0) * 100
         duty_g = (g / 255.0) * 100
         duty_b = (b / 255.0) * 100
@@ -94,6 +95,10 @@ if __name__ == "__main__":
     Control.setup()
     print("setup complete")
     time.sleep(3)
+
+    Control.setRGB(0, 255, 0)
+    time.sleep(1)
+    Control.setRGB(0, 0, 255)
 
     print("opening door...")
     Control.open()
