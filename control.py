@@ -96,21 +96,23 @@ if __name__ == "__main__":
     print("setup complete")
     time.sleep(3)
 
+    print("green")
     Control.setRGB(0, 255, 0)
-    time.sleep(1)
+    time.sleep(2)
+    print("blue")
     Control.setRGB(0, 0, 255)
-    time.sleep(1)
+    time.sleep(2)
 
-    print("opening door...")
-    Control.open()
-    print("door opened")
-    if Control.verified_open():
-        print("the door is indeed open")
-    time.sleep(15)
-
-    print("closing door...")
-    Control.close()
-    print("door closed")
-
-    while True:
-        print(GPIO.input(Control.BTN))
+    # print("opening door...")
+    # Control.open()
+    # print("door opened")
+    # if Control.verified_open():
+    #     print("the door is indeed open")
+    # time.sleep(15)
+    #
+    # print("closing door...")
+    # Control.close()
+    # print("door closed")
+    #
+    # while True:
+    #     print(GPIO.input(Control.BTN))
