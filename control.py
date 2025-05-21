@@ -96,16 +96,9 @@ if __name__ == "__main__":
     print("setup complete")
     time.sleep(3)
 
-    # print("opening door...")
-    # Control.open()
-    # print("door opened")
-    # if Control.verified_open():
-    #     print("the door is indeed open")
-    # time.sleep(15)
-    #
-    # print("closing door...")
-    # Control.close()
-    # print("door closed")
+    print("opening door")
+    Control.open()
+
     #
     while True:
         print(GPIO.input(Control.BTN))
