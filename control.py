@@ -99,6 +99,7 @@ if __name__ == "__main__":
     Control.setRGB(0, 255, 0)
     time.sleep(1)
     Control.setRGB(0, 0, 255)
+    time.sleep(1)
 
     print("opening door...")
     Control.open()
