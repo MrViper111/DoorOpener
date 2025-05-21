@@ -98,8 +98,10 @@ if __name__ == "__main__":
 
     print("opening door")
     Control.open()
-
+    time.sleep(5)
+    print("closing door")
+    Control.close()
     #
-    while True:
-        print(GPIO.input(Control.BTN))
-        time.sleep(1)
+    # while True:
+    #     print(GPIO.input(Control.BTN))
+    #     time.sleep(1)
